@@ -52,3 +52,6 @@ htmlcov/
 node_modules/
 package-lock.json
 yarn.lock
+
+# Firebase service account
+service_account.json
