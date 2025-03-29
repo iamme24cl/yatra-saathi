@@ -8,7 +8,7 @@ router = APIRouter()
 def register_user(user=Depends(verify_token_and_register)):
     return user
 
-@router.get("/login", response_model=UserResponse)
+@router.post("/login", response_model=UserResponse)
 def login_user(user=Depends(verify_token_and_login)):
     return user
 

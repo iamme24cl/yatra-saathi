@@ -1,6 +1,11 @@
 import uuid
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+
+class UserUpdate(BaseModel):
+  email: Optional[EmailStr]
+  name: Optional[str]
+  phone: Optional[str]
   
 class UserResponse(BaseModel):
   id: uuid.UUID
