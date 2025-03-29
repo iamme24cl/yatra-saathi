@@ -1,6 +1,7 @@
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 from app.database import Base
 
 class User(Base):
@@ -12,3 +13,5 @@ class User(Base):
     phone = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
     role = Column(String, default="customer") # driver, customer, admin
+    
+    driver = relationship("Driver", back_populates="user", uselist=False)
