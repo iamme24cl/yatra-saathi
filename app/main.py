@@ -3,8 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.logger import logging
-
-from app.api import auth, user, driver
+from app.api.routes import api_router
 
 logger = logging.getLogger(__name__)
 logger.info("Starting YatraSaathi backend...")
@@ -19,9 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(user.router, prefix="/users")
-app.include_router(driver.router, prefix="/drivers")
+app.include_router(api_router)
 
 @app.get("/")
 def root():
