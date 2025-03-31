@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Boolean, ForeignKey
+from sqlalchemy import Column, Boolean, DateTime, ForeignKey, func
 from sqlalchemy.dialects.postgresql import UUID, JSON
 from sqlalchemy.orm import relationship
 import uuid
@@ -17,5 +17,9 @@ class Driver(Base):
         comment="Vehicle info as JSON: type, model, year, passenger_capacity, license_number"
     )
     available = Column(Boolean, default=True)
+    
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+    deleted_at = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="driver")

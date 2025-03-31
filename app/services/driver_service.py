@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy.orm import Session
 from uuid import UUID
 from app.models.driver import Driver
@@ -24,8 +25,9 @@ def update_driver(driver: Driver, updates: DriverUpdate, db: Session) -> Driver:
     return driver
 
 def delete_driver(driver: Driver, db: Session):
-    db.delete(driver)
+    driver.deleted_at = datetime.utcnow()
     db.commit()
+    db.refresh(driver)
 
 def update_availability(driver: Driver, availability: DriverAvailabilityUpdate, db: Session) -> Driver:
     driver.available = availability.available

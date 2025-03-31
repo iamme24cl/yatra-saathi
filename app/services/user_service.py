@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy.orm import Session
 from uuid import UUID
 from app.models.user import User
@@ -15,8 +16,9 @@ def update_user_info(user: User, updates: UserUpdate, db: Session) -> User:
   return user
 
 def delete_user(user: User, db: Session):
-  db.delete(user)
+  user.deleted_at = datetime.utcnow()
   db.commit()
+  db.refresh(user)
   
   
   
