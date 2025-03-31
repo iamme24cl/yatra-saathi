@@ -17,7 +17,7 @@ def get_driver_by_id(driver_id: UUID, db: Session) -> Driver | None:
     return db.query(Driver).filter(Driver.id == driver_id).first()
 
 def update_driver(driver: Driver, updates: DriverUpdate, db: Session) -> Driver:
-    for field, value in updates.dict(exclude_unset=True).items():
+    for field, value in updates.model_dump(exclude_unset=True).items():
         setattr(driver, field, value)
     db.commit()
     db.refresh(driver)
