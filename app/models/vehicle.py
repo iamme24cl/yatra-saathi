@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, DateTime, Integer, String, ForeignKey, Boolean, func
 from sqlalchemy.dialects.postgresql import UUID, JSON
 from sqlalchemy.orm import relationship
 import uuid
@@ -19,6 +19,10 @@ class Vehicle(Base):
     license_number = Column(String, unique=True)
     
     available = Column(Boolean, default=True)
+    
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+    deleted_at = Column(DateTime, nullable=True)
 
     driver = relationship("Driver", back_populates="vehicle")
     company = relationship("Company", back_populates="vehicles")
