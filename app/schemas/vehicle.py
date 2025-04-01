@@ -1,0 +1,24 @@
+from pydantic import BaseModel
+from uuid import UUID
+from typing import Optional
+
+from app.schemas.company import CompanyResponse
+
+class VehicleBase(BaseModel):
+    type: str
+    model: str
+    year: int
+    passenger_capacity: int
+    license_number: str
+
+class VehicleCreate(VehicleBase):
+    company_id: Optional[UUID] = None  # Optional if it's a personal vehicle
+
+class VehicleResponse(VehicleBase):
+    id: UUID
+    company_id: Optional[UUID] = None
+    company: Optional[CompanyResponse] = None
+    owner_driver_id: Optional[UUID] = None
+
+    class Config:
+        orm_mode = True

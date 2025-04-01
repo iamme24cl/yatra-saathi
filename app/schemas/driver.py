@@ -1,27 +1,27 @@
 from pydantic import BaseModel
 from typing import Optional
 from uuid import UUID
-
-class VehicleInfo(BaseModel):
-    type: str
-    model: str
-    year: int
-    passenger_capacity: int
-    license_number: str
+from app.schemas.company import CompanyResponse
+from app.schemas.vehicle import VehicleResponse, VehicleCreate  
 
 class DriverCreate(BaseModel):
-    vehicle_info: VehicleInfo
+    vehicle_id: UUID
+    vehicle_info:  VehicleCreate 
 
 class DriverUpdate(BaseModel):
-    vehicle_info: VehicleInfo
+    available: Optional[bool] = None
+    company_id: Optional[UUID] = None
+    vehicle_id: Optional[UUID] = None
 
 class DriverAvailabilityUpdate(BaseModel):
     available: bool
 
 class DriverResponse(BaseModel):
     id: UUID
-    vehicle_info: VehicleInfo
     available: bool
-
+    company_id: Optional[UUID] = None
+    vehicle: Optional[VehicleResponse] = None  
+    company: Optional[CompanyResponse] = None
+    
     class Config:
         orm_mode = True

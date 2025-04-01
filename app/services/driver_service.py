@@ -1,12 +1,23 @@
 import datetime
 from sqlalchemy.orm import Session
 from uuid import UUID
+from app.models.vehicle import Vehicle
+from app.schemas.vehicle import VehicleInfo
 from app.models.driver import Driver
 from app.schemas.driver import DriverCreate, DriverUpdate, DriverAvailabilityUpdate
+from app.models.user import User 
 
-def create_driver(driver_data: DriverCreate, user_id: UUID, db: Session) -> Driver:
-    driver = Driver(**driver_data.model_dump(), user_id=user_id)
+def create_driver(driver_data: DriverCreate, user: User, db: Session) -> Driver:
+    driver = Driver(**driver_data.model_dump(), user_id=user.id)
     db.add(driver)
+    db.flush() # This gives the driver and ID before vehicle creation
+    
+    if user.role == "driver" and driver.company_id is None and driver_data.vehicle_info:
+        # Create associated vehicle
+        vehicle_info: VehicleInfo = driver_data.vehicle_info
+        vehicle = Vehicle(**vehicle_info.model_dump(), driver_id=driver.id)
+        db.add(vehicle)
+    
     db.commit()
     db.refresh(driver)
     return driver

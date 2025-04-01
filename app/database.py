@@ -26,7 +26,7 @@ def get_db():
 # Import all models to register them with Base (for Alembic)
 # Placed at the bottom to avoid circular imports
 try:
-  from app.models import user, driver, booking
+  from app.models import user, driver, booking, company, vehicle
 except ImportError as e:
   # Optional: log or print if needed
   logger.error(f"Model import error: {e}")
