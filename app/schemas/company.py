@@ -4,7 +4,8 @@ from typing import Optional
 
 class CompanyBase(BaseModel):
     name: str
-    description: Optional[str] = None
+    email: str
+    phone: str 
 
 class CompanyCreate(CompanyBase):
     pass

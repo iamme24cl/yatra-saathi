@@ -13,12 +13,17 @@ class VehicleBase(BaseModel):
 
 class VehicleCreate(VehicleBase):
     company_id: Optional[UUID] = None  # Optional if it's a personal vehicle
+    driver_id: Optional[UUID] = None # Optional if it's a company vehicle
+    
+class VehicleUpdate(VehicleBase):
+    company_id: Optional[UUID] = None  # Optional if it's a personal vehicle
+    driver_id: Optional[UUID] = None # Optional if it's a company vehicle
 
 class VehicleResponse(VehicleBase):
     id: UUID
     company_id: Optional[UUID] = None
     company: Optional[CompanyResponse] = None
-    owner_driver_id: Optional[UUID] = None
+    driver_id: Optional[UUID] = None
 
     class Config:
         orm_mode = True
