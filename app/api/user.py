@@ -12,10 +12,10 @@ router = APIRouter()
 
 @router.get("/{user_id}", response_model=UserResponse)
 def get_user(user_id: UUID, db: Session = Depends(get_db)):
-  user = user_service.get_user_by_id(user_id, db)
-  if not user:
-    raise HTTPException(status_code=404, detail="User not found")
-  return user 
+    user = user_service.get_user_by_id(user_id, db)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user 
 
 @router.put("/{user_id}", response_model=UserResponse)
 def update_user(user_id: UUID, updates: UserUpdate, current_user: User = Depends(verify_token_and_login), db: Session = Depends(get_db)):

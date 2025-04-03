@@ -17,16 +17,16 @@ Base = declarative_base()
 
 # Dependency to get DB session
 def get_db():
-  db = SessionLocal()
-  try:
-    yield db
-  finally:
-    db.close()
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 # Import all models to register them with Base (for Alembic)
 # Placed at the bottom to avoid circular imports
 try:
-  from app.models import user, driver, booking, company, vehicle
+    from app.models import user, driver, booking, company, vehicle
 except ImportError as e:
-  # Optional: log or print if needed
-  logger.error(f"Model import error: {e}")
+    # Optional: log or print if needed
+    logger.error(f"Model import error: {e}")
