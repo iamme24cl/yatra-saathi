@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.env
+.env.local
+env/
+*.env
+
+# Database & Migrations
+*.sqlite3
+db.sqlite3
+alembic/versions/*.pyc
+
+# Logs & Debugging
+logs/
+*.log
+nohup.out
+
+# Editor & System Files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Dependencies
+*.egg-info/
+dist/
+build/
+*.bak
+
+# Docker
+docker-compose.override.yml
+*.dockerfile
+*.pid
+
+# Pytest / Coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.coverage
+*.cover
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Node.js (if frontend exists in the same repo)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Firebase service account
+service_account.json
+
+# Log files
+logs/
+
+notes.txt
